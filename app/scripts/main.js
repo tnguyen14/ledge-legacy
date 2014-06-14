@@ -2,7 +2,7 @@
 
 jQuery(document).ready(function($) {
   $.ajax({
-    url: '@@SERVERURL/accounts/toan',
+    url: 'http://localhost:3000/accounts/toan',
     success: function(data) {
       var balance = data.starting_balance;
       $('.account-name').html(data.name);

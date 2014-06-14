@@ -382,7 +382,30 @@ module.exports = function (grunt) {
         base: 'dist'
       },
       src: ['**']
-  }
+    },
+
+    replace: {
+      dev: {
+        options: {
+          patterns: [
+            {
+              json: config.dev
+            }
+          ]
+        },
+        files: [{expand: true, flatten: true, src: ['<%= config.app %>/scripts/{,*/}*.js'], dest: '<%= config.app %>/scripts/'}]
+      },
+      prod: {
+        options: {
+          patterns: [
+            {
+              json: config.prod
+            }
+          ]
+        },
+        files: [{expand: true, flatten: true, src: ['<%= config.app %>/scripts/{,*/}*.js'], dest: '<%= config.app %>/scripts/'}]
+      }
+    }
   });
 
 
@@ -395,6 +418,7 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       'autoprefixer',
+      'replace:dev',
       'connect:livereload',
       'watch'
     ]);
@@ -425,6 +449,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'replace:prod',
     'concat',
     'cssmin',
     'uglify',
