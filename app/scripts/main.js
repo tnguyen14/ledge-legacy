@@ -1,3 +1,5 @@
+'use strict'
+
 jQuery(document).ready(function($) {
     $.ajax({
         url: 'http://ledge-server.herokuapp.com/accounts/toan',
