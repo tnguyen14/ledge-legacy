@@ -1,7 +1,7 @@
 <tr class="transaction" data-id="{{_id}}">
     <td>{{printDate date}}</td>
     <td>{{description}}</td>
-    <td>{{printMoney amount}}</td>
+    <td class="amount" data-amount="{{amount}}">{{printMoney amount}}</td>
     <td>{{category}}</td>
     <td><a class="edit-transaction">Edit</a> <a class="delete-transaction" title="Delete" href="#">Delete</a></td>
 </tr>

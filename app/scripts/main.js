@@ -6,6 +6,12 @@ var _ = require('lodash');
 
 require('./handlebars-helpers.js');
 
+var balance = 0;
+
+var updateBalance = function (amount) {
+  $('.balance .amount').html(Handlebars.helpers.printMoney(amount));
+};
+
 var setupEvents = function() {
   $('.delete-transaction').on('click', function (e) {
     e.preventDefault();
@@ -15,7 +21,8 @@ var setupEvents = function() {
       url: '@@SERVERURL/accounts/toan/transactions/' + transactionId,
       type: 'DELETE',
       success: function () {
-        // @TODO: reload balance
+        balance = balance + (+transaction.find('.amount').data('amount'));
+        updateBalance(balance);
         transaction.remove();
       }
     });
@@ -26,7 +33,7 @@ jQuery(document).ready(function($) {
   $.ajax({
     url: '@@SERVERURL/accounts/toan',
     success: function(data) {
-      var balance = data.starting_balance;
+      balance = data.starting_balance;
       $('.accounts').append(templates.account({name: data.name, balance: balance}));
       _.each(data.categories, function (cat) {
         $('#category').append('<option value="' + cat + '">' + cat + '</option>');
@@ -36,7 +43,7 @@ jQuery(document).ready(function($) {
         balance = balance - tx.amount;
         $('.transactions').append(html);
       });
-      $('.balance .amount').html(Handlebars.helpers.printMoney(balance));
+      updateBalance(balance);
       setupEvents();
     }
   });
