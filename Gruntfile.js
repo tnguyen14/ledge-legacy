@@ -421,13 +421,12 @@ module.exports = function (grunt) {
           namespace: 'Templates',
           processName: function(filePath) {
             var fileName = filePath.replace(/.*templates\/(\w+)\.hbs/, '$1');
-            console.log(fileName);
             return fileName.split('/').join('.');
           },
           commonjs: true
         },
         files: {
-          '.tmp/templates/templates.js': '<%= config.app %>/templates/{,*/}*.hbs'
+          '<%= config.app %>/templates/all.js': '<%= config.app %>/templates/{,*/}*.hbs'
         }
       }
     }

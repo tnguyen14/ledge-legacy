@@ -1,7 +1,7 @@
 'use strict';
 
 var Handlebars = require('handlebars');
-var templates = require('../../.tmp/templates/templates.js')(Handlebars);
+var templates = require('../templates/all.js')(Handlebars);
 var _ = require('lodash');
 
 var setupEvents = function() {
