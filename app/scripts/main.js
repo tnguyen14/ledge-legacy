@@ -2,6 +2,14 @@
 
 var Handlebars = require('handlebars');
 var templates = require('../../.tmp/templates/templates.js')(Handlebars);
+var _ = require('lodash');
+
+
+var setupEvents = function() {
+  $('.delete-transaction').on('click', function (e) {
+    console.log($(e.target).closest('.transaction').data('id'));
+  });
+};
 
 jQuery(document).ready(function($) {
   console.log(templates);
@@ -25,8 +33,4 @@ jQuery(document).ready(function($) {
 
 });
 
-var setupEvents = function() {
-  $('.delete-transaction').on('click', function (e) {
-    console.log($(e.target).closest('.transaction').data('id'));
-  });
-}
+

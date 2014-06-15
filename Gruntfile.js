@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
         tasks: ['jshint', 'browserify:dist'],
         options: {
-            livereload: true
+          livereload: true
         }
       },
       jstest: {
@@ -233,7 +233,7 @@ module.exports = function (grunt) {
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration
-  usemin: {
+    usemin: {
       options: {
         assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
       },
@@ -427,7 +427,7 @@ module.exports = function (grunt) {
           commonjs: true
         },
         files: {
-        '.tmp/templates/templates.js': '<%= config.app %>/templates/{,*/}*.hbs'
+          '.tmp/templates/templates.js': '<%= config.app %>/templates/{,*/}*.hbs'
         }
       }
     }
