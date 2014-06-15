@@ -4,17 +4,29 @@ var Handlebars = require('handlebars');
 var templates = require('../../.tmp/templates/templates.js')(Handlebars);
 var _ = require('lodash');
 
-
 var setupEvents = function() {
   $('.delete-transaction').on('click', function (e) {
-    console.log($(e.target).closest('.transaction').data('id'));
+    e.preventDefault();
+    var transaction = $(e.target).closest('.transaction'),
+      transactionId = transaction.data('id');
+    $.ajax({
+      url: '@@SERVERURL/accounts/toan/transactions/' + transactionId,
+      type: 'DELETE',
+      success: function(data) {
+        // @TODO: reload balance
+        transaction.remove();
+      }
+    });
   });
 };
 
+// var money = function (amount) {
+//   return '$' + amount.toFixed(2);
+// };
+
 jQuery(document).ready(function($) {
-  console.log(templates);
   $.ajax({
-    url: 'http://localhost:3000/accounts/toan',
+    url: '@@SERVERURL/accounts/toan',
     success: function(data) {
       var balance = data.starting_balance;
       $('.account-name').html(data.name);
@@ -23,14 +35,11 @@ jQuery(document).ready(function($) {
       });
       _.each(data.transactions, function (tx) {
         var html = templates.transaction(tx);
+        balance = balance - tx.amount;
         $('.transactions').append(html);
       });
       $('.balance').append(balance);
-      console.log('yay!');
       setupEvents();
     }
   });
-
 });
-
-
