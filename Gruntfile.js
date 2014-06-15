@@ -405,6 +405,14 @@ module.exports = function (grunt) {
         },
         files: [{expand: true, flatten: true, src: ['<%= config.app %>/scripts/{,*/}*.js'], dest: '<%= config.app %>/scripts/'}]
       }
+    },
+
+    browserify: {
+      dist: {
+        files: [
+          {'.tmp/scripts/main.js': '<%= config.app %>/scripts/main.js'}
+        ]
+      }
     }
   });
 
@@ -419,6 +427,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'replace:dev',
+      'browserify:dist',
       'connect:livereload',
       'watch'
     ]);
@@ -450,6 +459,7 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'autoprefixer',
     'replace:prod',
+    'browserify:dist',
     'concat',
     'cssmin',
     'uglify',
