@@ -1,7 +1,10 @@
 {
   "name": "ledge",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "handlebars": "~2.0.0-alpha.4",
+    "moment": "~2.7.0"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.7.2",
