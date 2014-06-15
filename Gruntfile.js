@@ -77,7 +77,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        open: true,
+        open: false,
         livereload: 35729,
         // Change this to '0.0.0.0' to access the server from outside
         hostname: 'localhost'
@@ -413,6 +413,23 @@ module.exports = function (grunt) {
           {'.tmp/scripts/main.js': '<%= config.app %>/scripts/main.js'}
         ]
       }
+    },
+
+    handlebars: {
+      compile: {
+        options: {
+          namespace: 'Templates',
+          processName: function(filePath) {
+            var fileName = filePath.replace(/.*templates\/(\w+)\.hbs/, '$1');
+            console.log(fileName);
+            return fileName.split('/').join('.');
+          },
+          commonjs: true
+        },
+        files: {
+        '.tmp/templates/templates.js': '<%= config.app %>/templates/{,*/}*.hbs'
+        }
+      }
     }
   });
 
@@ -426,6 +443,7 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       'autoprefixer',
+      'handlebars:compile',
       'replace:dev',
       'browserify:dist',
       'connect:livereload',
@@ -458,6 +476,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'handlebars:compile',
     'replace:prod',
     'browserify:dist',
     'concat',
