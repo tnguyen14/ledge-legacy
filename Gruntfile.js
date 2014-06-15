@@ -41,7 +41,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint', 'browserify:dist', 'replace:dev'],
+        tasks: ['js:dev'],
         options: {
           livereload: true
         }
@@ -60,6 +60,13 @@ module.exports = function (grunt) {
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
+      },
+      templates: {
+        files: ['<%= config.app %>/templates/{,*/}*.hbs'],
+        tasks: ['handlebars:compile', 'js:dev'],
+        options: {
+          livereload: true
+        }
       },
       livereload: {
         options: {
@@ -443,8 +450,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'handlebars:compile',
-      'browserify:dist',
-      'replace:dev',
+      'js:dev',
       'connect:livereload',
       'watch'
     ]);
@@ -470,14 +476,23 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.registerTask('js', function (target) {
+    grunt.task.run(['jshint', 'browserify:dist']);
+
+    if (target === 'prod') {
+      grunt.task.run(['replace:prod']);
+    } else {
+      grunt.task.run(['replace:dev']);
+    }
+  });
+
   grunt.registerTask('build', [
     'clean:dist',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'handlebars:compile',
-    'browserify:dist',
-    'replace:prod',
+    'js:prod',
     'concat',
     'cssmin',
     'uglify',
