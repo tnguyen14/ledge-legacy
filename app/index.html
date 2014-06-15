@@ -34,9 +34,10 @@
                 </ul>
                 <h2 class="text-muted">ledge</h2>
             </div>
+            <h2>Accounts</h2>
             <div class="account">
                 <h3 class="account-name"></h3>
-                <p class="balance"><strong>Balance:</strong></p>
+                <p class="balance"><strong>Balance: </strong></p>
                 <h4>Transactions</h4>
                 <table class="transactions table">
                     <thead>
@@ -44,12 +45,14 @@
                         <th>Description</th>
                         <th>Amount</th>
                         <th>Category</th>
+                        <th></th>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
             </div>
             <form class="new-transaction form-inline" action="http://localhost:3000/accounts/toan/transactions" method="post">
+                <h4>Add a transaction</h4>
                 <div class="form-group">
                     <label class="sr-only" for="date">Date</label>
                     <input type="date" class="form-control" id="date" name="date" placeholder="Date">
