@@ -22,10 +22,6 @@ var setupEvents = function() {
   });
 };
 
-// var money = function (amount) {
-//   return '$' + amount.toFixed(2);
-// };
-
 jQuery(document).ready(function($) {
   $.ajax({
     url: '@@SERVERURL/accounts/toan',
