@@ -41,7 +41,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint', 'browserify:dist'],
+        tasks: ['jshint', 'browserify:dist', 'replace:dev'],
         options: {
           livereload: true
         }
@@ -393,7 +393,7 @@ module.exports = function (grunt) {
             }
           ]
         },
-        files: [{expand: true, flatten: true, src: ['<%= config.app %>/scripts/{,*/}*.js'], dest: '<%= config.app %>/scripts/'}]
+        files: [{expand: true, flatten: true, src: ['.tmp/scripts/{,*/}*.js'], dest: '.tmp/scripts/'}]
       },
       prod: {
         options: {
@@ -403,7 +403,7 @@ module.exports = function (grunt) {
             }
           ]
         },
-        files: [{expand: true, flatten: true, src: ['<%= config.app %>/scripts/{,*/}*.js'], dest: '<%= config.app %>/scripts/'}]
+        files: [{expand: true, flatten: true, src: ['.tmp/scripts/{,*/}*.js'], dest: '.tmp/scripts/'}]
       }
     },
 
@@ -444,8 +444,8 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'handlebars:compile',
-      'replace:dev',
       'browserify:dist',
+      'replace:dev',
       'connect:livereload',
       'watch'
     ]);
@@ -477,8 +477,8 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'autoprefixer',
     'handlebars:compile',
-    'replace:prod',
     'browserify:dist',
+    'replace:prod',
     'concat',
     'cssmin',
     'uglify',
