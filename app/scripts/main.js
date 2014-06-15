@@ -8,11 +8,43 @@ require('./handlebars-helpers.js');
 
 var balance = 0;
 
-var updateBalance = function (amount) {
-  $('.balance .amount').html(Handlebars.helpers.printMoney(amount));
+var updateBalance = function () {
+  $('.balance .amount').html(Handlebars.helpers.printMoney(balance));
+};
+
+var addTransaction = function (transaction) {
+  var html = templates.transaction(transaction);
+  balance = balance - transaction.amount;
+  $('.transactions').append(html);
 };
 
 var setupEvents = function() {
+  // add new transaction
+  $('.new-transaction').on('submit', function (e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    var date = $form.find('#date').val(),
+      description = $form.find('#description').val(),
+      amount = +$form.find('#amount').val(),
+      category = $form.find('#category').val();
+    $.ajax({
+      url: '@@SERVERURL/accounts/toan/transactions',
+      type: 'POST',
+      data: {
+        date: date,
+        amount: amount,
+        description: description,
+        category: category
+      },
+      success: function (data) {
+        addTransaction(data[0]);
+        updateBalance();
+        //@TODO clear form
+      }
+    });
+  });
+
+  // delete transaction
   $('.delete-transaction').on('click', function (e) {
     e.preventDefault();
     var transaction = $(e.target).closest('.transaction'),
@@ -22,7 +54,7 @@ var setupEvents = function() {
       type: 'DELETE',
       success: function () {
         balance = balance + (+transaction.find('.amount').data('amount'));
-        updateBalance(balance);
+        updateBalance();
         transaction.remove();
       }
     });
@@ -39,11 +71,9 @@ jQuery(document).ready(function($) {
         $('#category').append('<option value="' + cat + '">' + cat + '</option>');
       });
       _.each(data.transactions, function (tx) {
-        var html = templates.transaction(tx);
-        balance = balance - tx.amount;
-        $('.transactions').append(html);
+        addTransaction(tx);
       });
-      updateBalance(balance);
+      updateBalance();
       setupEvents();
     }
   });
