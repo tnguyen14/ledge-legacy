@@ -4,6 +4,8 @@ var Handlebars = require('handlebars');
 var templates = require('../templates/all.js')(Handlebars);
 var _ = require('lodash');
 
+require('./handlebars-helpers.js');
+
 var setupEvents = function() {
   $('.delete-transaction').on('click', function (e) {
     e.preventDefault();
@@ -12,7 +14,7 @@ var setupEvents = function() {
     $.ajax({
       url: '@@SERVERURL/accounts/toan/transactions/' + transactionId,
       type: 'DELETE',
-      success: function(data) {
+      success: function () {
         // @TODO: reload balance
         transaction.remove();
       }
