@@ -27,7 +27,7 @@ jQuery(document).ready(function($) {
     url: '@@SERVERURL/accounts/toan',
     success: function(data) {
       var balance = data.starting_balance;
-      $('.account-name').html(data.name);
+      $('.accounts').append(templates.account({name: data.name, balance: balance}));
       _.each(data.categories, function (cat) {
         $('#category').append('<option value="' + cat + '">' + cat + '</option>');
       });
@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
         balance = balance - tx.amount;
         $('.transactions').append(html);
       });
-      $('.balance').append(balance);
+      $('.balance .amount').html(Handlebars.helpers.printMoney(balance));
       setupEvents();
     }
   });

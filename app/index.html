@@ -35,43 +35,8 @@
                 <h2 class="text-muted">ledge</h2>
             </div>
             <h2>Accounts</h2>
-            <div class="account">
-                <h3 class="account-name"></h3>
-                <h4 class="balance">Balance: </h4>
-                <h4>Transactions</h4>
-                <table class="transactions table">
-                    <thead>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            <form class="new-transaction form-inline" action="http://localhost:3000/accounts/toan/transactions" method="post">
-                <h4>Add a transaction</h4>
-                <div class="form-group">
-                    <label class="sr-only" for="date">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" placeholder="Date">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Description">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" for="amount">Amount</label>
-                    <input type="number" step="any" class="form-control" id="amount" name="amount" placeholder="Amount">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" for="amount">Category</label>
-                    <select class="form-control" id="category" name="category">
-                    </select>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Add"/>
-            </form>
+            <div class="accounts">
+
             <div class="footer">
                 <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
             </div>

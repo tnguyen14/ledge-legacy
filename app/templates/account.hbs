@@ -1,0 +1,17 @@
+<div class="account">
+    <h3 class="account-name">{{name}}</h3>
+    <h4 class="balance">Balance:  <span class="amount">{{printMoney balance}}</span></h4>
+    <h4>Transactions</h4>
+    <table class="transactions table">
+        <thead>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th></th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    {{> addTransaction}}
+</div>
