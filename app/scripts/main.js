@@ -4,6 +4,8 @@ var Handlebars = require('handlebars');
 var templates = require('../templates/all.js')(Handlebars);
 var _ = require('lodash');
 
+var moment = require('moment-timezone');
+
 require('./handlebars-helpers.js');
 
 var balance = 0;
@@ -31,7 +33,7 @@ var setupEvents = function() {
       url: '@@SERVERURL/accounts/toan/transactions',
       type: 'POST',
       data: {
-        date: date,
+        date: moment.tz(date, 'America/New_York').format(),
         amount: amount,
         description: description,
         category: category
