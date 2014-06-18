@@ -20,6 +20,10 @@ var addTransaction = function (transaction) {
   $('.transactions').append(html);
 };
 
+var clearForm = function ($form) {
+  $form.find('input, textarea, select').val('');
+};
+
 var setupEvents = function() {
   // add new transaction
   $('.new-transaction').on('submit', function (e) {
@@ -41,7 +45,7 @@ var setupEvents = function() {
       success: function (data) {
         addTransaction(data[0]);
         updateBalance();
-        //@TODO clear form
+        clearForm($form);
       }
     });
   });
