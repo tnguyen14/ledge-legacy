@@ -20,6 +20,15 @@ var addTransaction = function (transaction) {
   $('.transactions').append(html);
 };
 
+var updateTransaction = function (transaction) {
+  var $transaction = $('.transactions').find('.transaction[data-id="' + transaction._id + '"]');
+  console.log($transaction);
+  var oldAmt = +$transaction.find('.amount').data('value');
+  balance = balance + oldAmt - transaction.amount;
+  var newTransaction = templates.transaction(transaction);
+  $transaction.html($(newTransaction).html());
+};
+
 var clearForm = function ($form) {
   $form.find('input, textarea, select').val('');
 };
@@ -44,12 +53,24 @@ var setupEvents = function() {
     e.preventDefault();
     var $form = $(e.target);
     var data = getTransactionData($form);
+    var action = ($form.data('action') === 'add') ? 'add' : 'edit';
+    var transactionId = $form.data('transactionid');
+    var uri = (action === 'add') ? '' : '/' + transactionId;
+    var actionType = (action === 'add') ? 'POST' : 'PUT';
+
     $.ajax({
-      url: '@@SERVERURL/accounts/toan/transactions',
-      type: 'POST',
+      url: '@@SERVERURL/accounts/toan/transactions' + uri,
+      type: actionType,
       data: data,
       success: function (data) {
-        addTransaction(data[0]);
+        if (action === 'add') {
+          _.map(data, addTransaction);
+        } else {
+          if (!data.hasOwnProperty('_id')) {
+            _.extend(data, {_id: transactionId});
+          }
+          updateTransaction(data);
+        }
         updateBalance();
         clearForm($form);
       }
@@ -78,7 +99,8 @@ var setupEvents = function() {
     var $form = $('.new-transaction'),
       $transaction = $(e.target).closest('.transaction'),
       transactionId = $transaction.data('id');
-
+    $form.attr('data-action', 'edit');
+    $form.attr('data-transactionId', transactionId);
     $form.find('h4').html('Edit transaction ' + transactionId);
     $form.find('#date').val(moment($transaction.find('.date').data('value')).format('YYYY-MM-DD'));
     $form.find('#description').val($transaction.find('.description').html());

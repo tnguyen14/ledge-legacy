@@ -4,7 +4,7 @@ var Handlebars = require('handlebars');
 var moment = require('moment');
 
 Handlebars.registerHelper('printDate', function (string) {
-  return moment(string).format('MMM-DD-YY ZZ');
+  return moment(string).format('MMM-DD-YY');
 });
 
 Handlebars.registerHelper('printMoney', function (amount) {
