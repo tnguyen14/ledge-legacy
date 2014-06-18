@@ -47,7 +47,7 @@ var setupEvents = function() {
   });
 
   // delete transaction
-  $('.delete-transaction').on('click', function (e) {
+  $('.transactions').on('click', '.delete-transaction', function (e) {
     e.preventDefault();
     var transaction = $(e.target).closest('.transaction'),
       transactionId = transaction.data('id');
