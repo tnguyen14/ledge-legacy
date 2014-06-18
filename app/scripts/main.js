@@ -71,6 +71,21 @@ var setupEvents = function() {
       }
     });
   });
+
+  // edit transaction
+  $('.transactions').on('click', '.edit-transaction', function (e) {
+    e.preventDefault();
+    var $form = $('.new-transaction'),
+      $transaction = $(e.target).closest('.transaction'),
+      transactionId = $transaction.data('id');
+
+    $form.find('h4').html('Edit transaction ' + transactionId);
+    $form.find('#date').val(moment($transaction.find('.date').data('value')).format('YYYY-MM-DD'));
+    $form.find('#description').val($transaction.find('.description').html());
+    $form.find('#amount').val($transaction.find('.amount').html().split('$')[1]);
+    $form.find('#category').val($transaction.find('.category').html());
+    $form.find('input[type="submit"]').val('Save');
+  });
 };
 
 jQuery(document).ready(function($) {

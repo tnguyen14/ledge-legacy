@@ -1,7 +1,7 @@
 <tr class="transaction" data-id="{{_id}}">
-    <td class="date">{{printDate date}}</td>
-    <td class="description">{{description}}</td>
-    <td class="amount" data-amount="{{amount}}">{{printMoney amount}}</td>
-    <td class="category">{{category}}</td>
-    <td><a class="edit-transaction">Edit</a> <a class="delete-transaction" title="Delete" href="#">Delete</a></td>
+    <td class="date" data-value="{{date}}">{{printDate date}}</td>
+    <td class="description" data-value="{{description}}">{{description}}</td>
+    <td class="amount" data-value="{{amount}}">{{printMoney amount}}</td>
+    <td class="category" data-value="{{category}}">{{category}}</td>
+    <td><a class="edit-transaction" href="#">Edit</a> <a class="delete-transaction" title="Delete" href="#">Delete</a></td>
 </tr>
