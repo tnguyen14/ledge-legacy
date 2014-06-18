@@ -24,24 +24,30 @@ var clearForm = function ($form) {
   $form.find('input, textarea, select').val('');
 };
 
+var getTransactionData = function ($form) {
+  var date = $form.find('#date').val(),
+    description = $form.find('#description').val(),
+    amount = +$form.find('#amount').val(),
+    category = $form.find('#category').val();
+
+  return {
+    date: moment.tz(date, 'America/New_York').toDate(),
+    amount: amount,
+    description: description,
+    category: category
+  };
+};
+
 var setupEvents = function() {
   // add new transaction
   $('.new-transaction').on('submit', function (e) {
     e.preventDefault();
     var $form = $(e.target);
-    var date = $form.find('#date').val(),
-      description = $form.find('#description').val(),
-      amount = +$form.find('#amount').val(),
-      category = $form.find('#category').val();
+    var data = getTransactionData($form);
     $.ajax({
       url: '@@SERVERURL/accounts/toan/transactions',
       type: 'POST',
-      data: {
-        date: moment.tz(date, 'America/New_York').format(),
-        amount: amount,
-        description: description,
-        category: category
-      },
+      data: data,
       success: function (data) {
         addTransaction(data[0]);
         updateBalance();
