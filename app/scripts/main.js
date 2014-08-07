@@ -1,7 +1,7 @@
 'use strict';
 
 var Handlebars = require('handlebars');
-var templates = require('../templates/all.js')(Handlebars);
+var templates = require('templates/all.js')(Handlebars);
 var _ = require('lodash');
 
 var moment = require('moment-timezone');

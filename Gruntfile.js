@@ -15,6 +15,7 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var remapify = require('remapify');
   // Configurable paths
   var config = {
     app: 'app',
@@ -418,7 +419,16 @@ module.exports = function (grunt) {
       dist: {
         files: [
           {'.tmp/scripts/main.js': '<%= config.app %>/scripts/main.js'}
-        ]
+        ],
+        options: {
+          preBundleCB: function (b) {
+            b.plugin(remapify, [{
+              src: './**/*.js',
+              expose: 'templates',
+              cwd: './.tmp/templates/'
+            }]);
+          }
+        }
       }
     },
 
@@ -433,7 +443,7 @@ module.exports = function (grunt) {
           commonjs: true
         },
         files: {
-          '<%= config.app %>/templates/all.js': '<%= config.app %>/templates/{,*/}*.hbs'
+          '.tmp/templates/all.js': '<%= config.app %>/templates/{,*/}*.hbs'
         }
       }
     }
