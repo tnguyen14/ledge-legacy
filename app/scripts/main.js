@@ -1,7 +1,9 @@
 'use strict';
 
-var checking = require('./checking.js');
+var budget = require('./budget'),
+  checking = require('./checking');
 
 jQuery(document).ready(function($) {
-  checking.init();
+  // default to budget
+  budget.init();
 });
