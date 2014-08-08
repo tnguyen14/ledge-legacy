@@ -106,6 +106,7 @@ var setupEvents = function() {
 };
 
 exports.init = function () {
+  $('.primary').empty().html(templates.checking);
   var $accounts = $('.accounts');
   $accounts.html('Loading...');
   $.ajax({
