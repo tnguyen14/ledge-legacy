@@ -435,9 +435,14 @@ module.exports = function (grunt) {
     handlebars: {
       compile: {
         options: {
-          namespace: 'Templates',
+          namespace: function (filename) {
+            // generate namespace based on file system paths
+            // https://github.com/gruntjs/grunt-contrib-handlebars#namespace
+            var names = filename.replace(/app\/(.*)(\/\w+\.hbs)/, '$1');
+            return names.split('/').join('.');
+          },
           processName: function(filePath) {
-            var fileName = filePath.replace(/.*templates\/(\w+)\.hbs/, '$1');
+            var fileName = filePath.replace(/.*\/(\w+)\.hbs/, '$1');
             return fileName.split('/').join('.');
           },
           commonjs: true
