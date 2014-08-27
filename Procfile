@@ -1,1 +1,1 @@
-web: ./node_modules/.bin/grunt build && node server/index.js
+web: echo $(pwd) && ./node_modules/.bin/grunt build && node server/index.js
