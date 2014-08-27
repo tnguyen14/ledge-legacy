@@ -2,6 +2,18 @@
   "name": "ledge",
   "version": "0.0.0",
   "main": "server/index.js",
+  "description": "Ledge client.",
+  "homepage": "https://github.com/tnguyen14/ledge",
+  "bugs": "https://github.com/tnguyen14/ledge/issues",
+  "author": {
+    "name": "Tri Nguyen",
+    "email": "tri@tridnguyen.com",
+    "url": "tridnguyen.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tnguyen14/ledge"
+  },
   "dependencies": {
     "compression": "^1.0.11",
     "connect": "^2.25.8",
@@ -44,6 +56,6 @@
     "time-grunt": "~0.3.1"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "0.10.x"
   }
 }
