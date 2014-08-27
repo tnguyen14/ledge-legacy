@@ -51,7 +51,7 @@ var setupEvents = function() {
     var action = ($form.data('action') === 'add') ? 'add' : 'edit';
     var transactionId = $form.data('transactionid');
     var uri = (action === 'add') ? '' : '/' + transactionId;
-    var actionType = (action === 'add') ? 'POST' : 'PUT';
+    var actionType = (action === 'add') ? 'POST' : 'PATCH';
 
     $.ajax({
       url: '@@SERVERURL/accounts/toan/transactions' + uri,
