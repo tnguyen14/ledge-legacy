@@ -1,1 +1,1 @@
-web: grunt build && node server/index.js
+web: ./node_modules/.bin/grunt build && node server/index.js
