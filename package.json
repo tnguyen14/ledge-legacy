@@ -14,6 +14,9 @@
     "type": "git",
     "url": "https://github.com/tnguyen14/ledge"
   },
+  "scripts": {
+    "postinstall": "bower install && grunt build"
+  },
   "dependencies": {
     "ampersand-model": "^4.0.1",
     "ampersand-router": "^1.0.2",
