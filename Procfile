@@ -1,1 +1,1 @@
-web: echo $(pwd) && ./node_modules/.bin/grunt build && node server/index.js
+web: bower install && grunt build && node server/index.js
