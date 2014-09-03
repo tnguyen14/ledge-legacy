@@ -1,6 +1,7 @@
 'use strict';
 
 var restify = require('restify');
+var serveStatic = require('serve-static');
 
 var server = restify.createServer({
   name: 'ledge-client',
