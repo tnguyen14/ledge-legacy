@@ -14,9 +14,6 @@
     "type": "git",
     "url": "https://github.com/tnguyen14/ledge"
   },
-  "scripts": {
-    "postinstall": "bower install && grunt build"
-  },
   "dependencies": {
     "ampersand-model": "^4.0.1",
     "ampersand-router": "^1.0.2",
@@ -27,8 +24,9 @@
     "moment": "~2.7.0",
     "moment-timezone": "0.0.6",
     "restify": "^2.8.2",
-    "serve-static": "^1.5.3",
-    "bower": "^1.3.9",
+    "serve-static": "^1.5.3"
+  },
+  "devDependencies": {
     "browserify": "~4.1.10",
     "grunt": "~0.4.1",
     "grunt-cli": "^0.1.13",
@@ -60,9 +58,6 @@
     "load-grunt-tasks": "~0.4.0",
     "remapify": "^0.1.6",
     "time-grunt": "~0.3.1"
-  },
-  "devDependencies": {
-
   },
   "engines": {
     "node": "0.10.x"
